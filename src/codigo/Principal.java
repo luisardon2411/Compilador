@@ -29,6 +29,6 @@ public class Principal {
         File archivo = new File(ruta);
       //  String [] argv = new String [] {archivo.getPath()};
         JFlex.Main.generate(archivo);
-    }
+   }
    
 }

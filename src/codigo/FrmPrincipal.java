@@ -96,21 +96,16 @@ try {
             return;
         }
         switch (tokens) {
-            case ERROR:
-                resultado += "Simbolo no definido\n";
-                break;
-            case Identificador: case Numero: case Reservadas:
-                resultado += lexer.lexeme + ": Es un " + tokens + "\n";
-                break;
-            default:
-                resultado += "Token: " + tokens + "\n";
-                break;
+            case ERROR -> resultado += "Simbolo no definido\n";
+            case Identificador, Numero, Reservadas, signoAgrupacion, signoPuntuacion -> resultado += lexer.lexeme + ": Es un " + tokens + "\n";
         }
     }
 } catch (FileNotFoundException ex) {
+    System.out.print(ex);
    // Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
 } catch (IOException ex) {
-   // Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+    System.out.println(ex);
+   //Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
 }
     }//GEN-LAST:event_btnAnalizarActionPerformed
 

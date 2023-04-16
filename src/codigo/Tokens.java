@@ -19,5 +19,7 @@ public enum Tokens {
     Identificador,
     Numero,
     ERROR,
-    INICIO
+    INICIO,
+    signoPuntuacion,
+    signoAgrupacion,
 }

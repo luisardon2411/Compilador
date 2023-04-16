@@ -25,6 +25,14 @@ Por Valor | Real | Segun | Si | Sin Saltar | SiNo | SubProceso | Verdadero {lexe
 "-" {lexeme=yytext(); return opResta;}
 "*" {lexeme=yytext(); return opMultiplicacion;}
 "/" {lexeme=yytext(); return opDivision;}
+"." { lexeme=yytext(); return signoPuntuacion; }
+"," {lexeme=yytext(); return signoPuntuacion; }
+"[" {lexeme=yytext(); return signoAgrupacion;}
+"]" {lexeme=yytext(); return signoAgrupacion;}
+"(" {lexeme=yytext(); return signoAgrupacion; }
+")" {lexeme=yytext(); return signoAgrupacion; }
+"{" {lexeme=yytext(); return signoAgrupacion;}
+"}" {lexeme=yytext(); return signoAgrupacion; }
 {Letras}({Letras}|{Digitos})* {lexeme=yytext(); return Identificador;}
 ("(-"{Digitos}+")")|{Digitos}+ {lexeme=yytext(); return Numero;}
  . {lexeme=yytext(); return ERROR;}
