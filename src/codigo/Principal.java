@@ -9,14 +9,14 @@ import java.io.File;
 
 /**
  *
- * @author ioch
+ * @author luise.ardon
  */
 public class Principal {
     
     public static void main(String[] args) {
         
         //Main apunta a la ruta del archivo flex para ser generado
-        String ruta = "C:/Users/jeffr/OneDrive/Documentos/NetBeansProjects/AnalizadorJava/src/codigo/Lexer.flex";
+        String ruta = "C:\\Users\\luise.ardon\\Documents\\NetBeansProjects\\Compilador\\src\\codigo\\Lexer.flex";
         
         generarLexer(ruta);
         

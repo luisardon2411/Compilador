@@ -15,7 +15,7 @@ import javax.swing.JFileChooser;
 
 /**
  *
- * @author jeffr
+ * @author luise.ardon
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
@@ -82,7 +82,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarActionPerformed
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
-chooser.showOpenDialog(null);
+        chooser.showOpenDialog(null);
 
 try {
     Reader lector = new BufferedReader(new FileReader(chooser.getSelectedFile()));
@@ -96,8 +96,9 @@ try {
             return;
         }
         switch (tokens) {
-            case ERROR -> resultado += "Simbolo no definido\n";
-            case Identificador, Numero, Reservadas, signoAgrupacion, signoPuntuacion -> resultado += lexer.lexeme + ": Es un " + tokens + "\n";
+            case error -> resultado += tokens.mensaje(null);
+            case agrupacion, delimitador, signo -> resultado += lexer.lexeme + ": Es un signo de " + tokens + "\n";
+            default -> resultado += tokens.mensaje(lexer.lexeme);
         }
     }
 } catch (FileNotFoundException ex) {
