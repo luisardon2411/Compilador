@@ -22,4 +22,5 @@ public enum Tokens {
     INICIO,
     signoPuntuacion,
     signoAgrupacion,
+    agregarOtro,
 }
