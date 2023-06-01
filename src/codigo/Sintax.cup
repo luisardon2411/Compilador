@@ -1,0 +1,108 @@
+package codigo;
+
+import java_cup.runtime.Symbol;
+
+parser code
+{:
+    private Symbol s;
+    
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+}
+:};
+
+terminal Si, Sino, Fin_Si, Segun, Caso, Defecto, Fin_Segun, Mientras, Fin_Mientras,
+Repetir, Hasta, Hasta_Que, Para, Fin_Para, Hacer, Con_Paso, T_Dato, Leer, Escribir,
+Funcion, Fin_Funcion, Procedimiento, Fin_Procedimiento, Algoritmo, Fin_Algoritmo,
+Suma, Resta, Multiplicacion, Division, Op_Logico, Op_Comparacion, Op_Asignacion,
+P_Coma, Punto, Coma, Puntos, Op_Booleano, Parentesis_a, Parentesis_c, Llave_a, Llave_c,
+Corchete_a, Corchete_c, Entonces, Identificador, Numero, Comillas, Cadena, ERROR;
+non terminal INICIO, SENTENCIA, DECLARACION, SI, SENTENCIA_BOOLEANA, SINO,
+MIENTRAS, PARA, SENTENCIA_PARA,SENTENCIA_SEGUN, SEGUN, REPETIR;
+
+start with INICIO;
+
+INICIO ::= 
+    Algoritmo Identificador SENTENCIA Fin_Algoritmo |
+    Algoritmo Identificador Fin_Algoritmo
+;
+SENTENCIA ::= 
+    SENTENCIA DECLARACION |
+    DECLARACION |
+    SENTENCIA SI |
+    SI |
+    SENTENCIA SINO |
+    SINO |
+    SENTENCIA MIENTRAS |
+    MIENTRAS |
+    SENTENCIA PARA |
+    PARA |
+    SENTENCIA SEGUN |
+    SEGUN |
+    SENTENCIA REPETIR |
+    REPETIR 
+;
+DECLARACION ::= 
+    T_Dato Identificador P_Coma | 
+    T_Dato Identificador Op_Asignacion Numero P_Coma |
+    T_Dato Identificador Op_Asignacion Cadena P_Coma |
+    T_Dato Identificador Op_Asignacion Op_Booleano P_Coma |
+    Escribir Identificador P_Coma |
+    Leer Identificador P_Coma |
+    Escribir Cadena P_Coma |
+    Leer Cadena P_Coma |
+    Escribir Identificador Op_Asignacion Numero P_Coma |
+    Leer Identificador Op_Asignacion Numero P_Coma |
+    Escribir Identificador Op_Asignacion Cadena P_Coma |
+    Leer Identificador Op_Asignacion Cadena P_Coma |
+    Identificador Op_Asignacion Identificador Suma Numero P_Coma|
+    Identificador Op_Asignacion Identificador Resta Numero P_Coma|
+    Identificador Op_Asignacion Identificador Multiplicacion Numero P_Coma|
+    Identificador Op_Asignacion Identificador Division Numero P_Coma
+;
+SI ::= Si SENTENCIA_BOOLEANA SENTENCIA Fin_Si |
+    Si SENTENCIA_BOOLEANA Entonces Escribir Cadena P_Coma Fin_Si |
+    Si SENTENCIA_BOOLEANA Entonces Escribir Cadena P_Coma Leer Identificador P_Coma Fin_Si
+;
+SENTENCIA_BOOLEANA ::= 
+    Op_Booleano | 
+    Identificador Op_Comparacion Op_Booleano |
+    Identificador Op_Comparacion Numero |
+    Numero Op_Comparacion Identificador |
+    Numero Op_Comparacion Numero |
+    Identificador Op_Comparacion Identificador |
+    Identificador Op_Comparacion Cadena
+;
+SINO ::= Si SENTENCIA_BOOLEANA SENTENCIA Sino SENTENCIA Fin_Si |
+    Si SENTENCIA_BOOLEANA Entonces Escribir Cadena P_Coma Sino Escribir Cadena P_Coma Fin_Si |
+    Si SENTENCIA_BOOLEANA Entonces Escribir Cadena P_Coma Leer Identificador P_Coma Sino Escribir Cadena P_Coma Leer Identificador P_Coma Fin_Si
+;
+MIENTRAS ::=
+    Mientras SENTENCIA_BOOLEANA Hacer SENTENCIA Fin_Mientras 
+;
+PARA ::= Para SENTENCIA_PARA SENTENCIA Fin_Para
+;
+SENTENCIA_PARA ::=
+    T_Dato Identificador Op_Asignacion Numero Hasta Numero Con_Paso Numero|
+    Identificador Op_Asignacion Numero Hasta Numero Con_Paso Numero |
+    Identificador Op_Asignacion Numero Hasta SENTENCIA_BOOLEANA Con_Paso Numero
+;
+SEGUN ::=
+    Segun Parentesis_a Identificador Parentesis_c Hacer SENTENCIA_SEGUN Defecto Escribir Cadena Fin_Segun 
+;
+SENTENCIA_SEGUN ::= 
+    Caso Numero Puntos DECLARACION |
+    Caso Numero Puntos DECLARACION Caso Numero Puntos DECLARACION |
+    Caso Numero Puntos DECLARACION Caso Numero Puntos DECLARACION Caso Numero Puntos DECLARACION |
+    Caso Numero Puntos DECLARACION Caso Numero Puntos DECLARACION Caso Numero Puntos DECLARACION Caso Numero Puntos DECLARACION |
+    Caso Numero Puntos DECLARACION Caso Numero Puntos DECLARACION Caso Numero Puntos DECLARACION Caso Numero Puntos DECLARACION Caso Numero Puntos DECLARACION
+
+;
+REPETIR ::=  
+    Repetir Llave_a SENTENCIA DECLARACION Llave_c Hasta_Que Parentesis_a SENTENCIA_BOOLEANA Parentesis_c P_Coma 
+;
+

@@ -1,0 +1,8 @@
+algoritmo cicloPara
+     entero contador;
+     
+     para contador = 1 hasta 10 con_paso 1  
+     escribir contador;
+    fin_para
+
+finAlgoritmo
